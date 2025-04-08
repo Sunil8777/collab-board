@@ -1,7 +1,7 @@
 export default {
     providers: [
       {
-        domain: "https://true-mudfish-27.clerk.accounts.dev",
+        domain: "https://sharp-weasel-6.clerk.accounts.dev",
         applicationID: "convex",
       },
     ]
