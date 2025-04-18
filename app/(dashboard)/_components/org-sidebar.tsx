@@ -52,7 +52,7 @@ export function OrgSidebar() {
       />
       <div className="space-y-1 w-full">
         <Button
-          variant={favourites? "ghost" : "secondary"}
+          variant="ghost"
           asChild
           size="lg"
           className="font-normal justify-start px-2 w-full"

@@ -9,7 +9,7 @@ export const useApiMutation = (mutationFn:any) => {
   const mutate = async (payload:any) => {
     setIsLoading(true)
     try {
-        await apiMutation(payload)
+      return await apiMutation(payload)
     } catch (error) {
         throw new Error("Something went wrong")
     }

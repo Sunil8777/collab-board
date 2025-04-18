@@ -16,13 +16,16 @@ export function NewBoardButton({ orgId, disabled }: NewBoardButtonProps) {
   const router = useRouter();
   const { mutate: create, isLoading } = useApiMutation(api.board.create);
 
-  const handleClick = () => {
-    create({ orgId, title: "Untitled" })
-      .then((id) => {
-        toast.success("Board created!");
-        router.push(`/board/${id}`);
-      })
-      .catch(() => toast.error("Failed to create board"));
+  const handleClick = async () => {
+    try {
+      const boardId = await create({ orgId, title: "Untitled" })
+      
+      toast.success("Board created!");
+      router.push(`/board/${boardId}`)
+      
+    } catch (error) {
+      toast.error("Failed to create board")
+    }
   };
 
   return (

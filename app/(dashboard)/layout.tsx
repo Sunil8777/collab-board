@@ -1,4 +1,4 @@
-
+import { RenameModal } from "@/components/modals/rename-modal"
 import { Navbar } from "./_components/navbar"
 import { OrgSidebar } from "./_components/org-sidebar"
 import { Sidebar } from "./_components/Sidebar"
