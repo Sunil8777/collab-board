@@ -39,6 +39,12 @@ export function BoardCard({
   isFavourite,
 }: BoardCardProps) {
   
+  const { mutate: favourite, isLoading: isFavouriting } = useApiMutation(
+    api.board.favourite
+  );
+  const { mutate: unfavourite, isLoading: isUnfavouriting } = useApiMutation(
+    api.board.unfavourite
+  );
 
   const { userId } = useAuth();
   const authorLabel = userId === authorId ? "You" : authorName;
@@ -47,7 +53,15 @@ export function BoardCard({
   });
 
   const toggleFavourite = () => {
-    
+    if (isFavourite) {
+      unfavourite({ id: id as Id<"boards"> }).catch(() =>
+        toast.error("Failed to unfavourite board")
+      );
+    } else {
+      favourite({ id: id as Id<"boards">, orgId }).catch(() =>
+        toast.error("Failed to favourite board")
+      );
+    }
   };
 
   return (
@@ -68,7 +82,7 @@ export function BoardCard({
           authorLabel={authorLabel}
           createdAtLabel={createdAtLabel}
           onClick={toggleFavourite}
-          disabled={false}
+          disabled={isFavouriting || isUnfavouriting}
         />
       </div>
     </Link>
