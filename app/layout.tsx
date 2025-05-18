@@ -4,6 +4,7 @@ import "./globals.css";
 import { ConvexClientProvider } from "@/providers/convex-client-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { RenameModal } from "@/components/modals/rename-modal";
+import { LiveblockProviders } from "@/providers/liveblock-provider";
 
 
 const geistSans = Geist({
@@ -32,9 +33,11 @@ export default function RootLayout({
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}
           >
             <ConvexClientProvider>
-              <Toaster/>
-              <RenameModal/>
-              {children}
+              <LiveblockProviders>
+                <Toaster/>
+                <RenameModal/>
+                {children}
+              </LiveblockProviders>
             </ConvexClientProvider>
           </body>
       </html>
