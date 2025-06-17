@@ -2,24 +2,19 @@
 
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
-
-
+import { useApiMutation } from "@/hooks/useApiMutation";
+import { useRenameModal } from "@/store/useRenameModal";
 import type { DropdownMenuContentProps } from "@radix-ui/react-dropdown-menu";
 import { Link2, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
-
-import { useApiMutation } from "@/hooks/use-api-mutation";
-import { 
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { ConfirmModal } from "./confirm-modal";
+import { ConfirmModal } from "./confirmModal";
 import { Button } from "./ui/button";
-import { useRenameModal } from "@/store/use-remane-modal";
-
-
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
 
 interface ActionsProp {
   children: React.ReactNode;
@@ -46,20 +41,17 @@ export function Actions({
       .catch(() => toast.error("Failed to copy link"));
   };
 
-  const handleDelete = async () => {
-    try {
-        remove({ id: id as Id<"boards"> })
-        toast.success("Board deleted!")
-    } catch (error) {
-        toast.error("Failed to delete board")
-    }
+  const handleDelete = () => {
+    remove({ id: id as Id<"boards"> })
+      .then(() => toast.success("Board deleted!"))
+      .catch(() => toast.error("Failed to delete board"));
   };
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>{children}</DropdownMenuTrigger>
       <DropdownMenuContent
-        onClick={(e:any) => e.stopPropagation()}
+        onClick={(e) => e.stopPropagation()}
         side={side}
         sideOffset={sideOffset}
         className="w-60"
