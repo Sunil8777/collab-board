@@ -6,7 +6,8 @@ import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { cn } from "@/lib/utils";
-import { useRenameModal } from "@/store/useRenameModal";
+import { useRenameModal } from "@/store/use-remane-modal";
+
 import { useQuery } from "convex/react";
 import { Menu } from "lucide-react";
 import { Poppins } from "next/font/google";

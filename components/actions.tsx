@@ -3,11 +3,11 @@
 import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel";
 import { useApiMutation } from "@/hooks/useApiMutation";
-import { useRenameModal } from "@/store/useRenameModal";
+
 import type { DropdownMenuContentProps } from "@radix-ui/react-dropdown-menu";
 import { Link2, Pencil, Trash2 } from "lucide-react";
 import { toast } from "sonner";
-import { ConfirmModal } from "./confirmModal";
+
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -15,6 +15,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
+import { useRenameModal } from "@/store/use-remane-modal";
+import { ConfirmModal } from "./modals/confirm-modal";
+
 
 interface ActionsProp {
   children: React.ReactNode;

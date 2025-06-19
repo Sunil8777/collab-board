@@ -18,6 +18,8 @@ import {
   useOthersMapped,
   useSelf,
   useStorage,
+  useIsInsideRoom,
+  useStorageRoot 
 } from "@liveblocks/react";
 import type { Side, XYWH } from "@/types/canvas";
 import {
@@ -47,6 +49,16 @@ interface CanvasProps {
 }
 
 export const Canvas = ({ boardId }: CanvasProps) => {
+  const isInsideRoom = useIsInsideRoom();
+  if (!isInsideRoom) {
+    return null 
+  }
+  const storageRoot = useStorageRoot();
+
+  if (!storageRoot) {
+    return null; 
+  }
+
   const layerIds = useStorage((root) => root.layerIds);
 
   const pencilDraft = useSelf((self) => self.presence.pencilDraft);

@@ -5,7 +5,6 @@ import { Plus } from "lucide-react";
 
 export function InviteButton() {
 
-  console.log(OrganizationProfile)
   return (
     <Dialog>
       <DialogTrigger asChild>
