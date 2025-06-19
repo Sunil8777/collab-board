@@ -50,20 +50,11 @@ interface CanvasProps {
 
 export const Canvas = ({ boardId }: CanvasProps) => {
   const isInsideRoom = useIsInsideRoom();
-  if (!isInsideRoom) {
-    return null 
-  }
+  const layerIds = useStorage((root) => root.layerIds);
+  const pencilDraft = useSelf((self) => self.presence.pencilDraft);
+  const selections = useOthersMapped((other) => other.presence.selection);
   const storageRoot = useStorageRoot();
 
-  if (!storageRoot) {
-    return null; 
-  }
-
-  const layerIds = useStorage((root) => root.layerIds);
-
-  const pencilDraft = useSelf((self) => self.presence.pencilDraft);
-
-  const selections = useOthersMapped((other) => other.presence.selection);
 
   const layerIdsToColorSelection = useMemo(() => {
     const layerIdsToColorSelection: Record<string, string> = {};
@@ -168,7 +159,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     }
   }, []);
 
-  const updateSelectionNet = useMutation(
+  useMutation(
     ({ storage, setMyPresence }, current: Point, origin: Point) => {
       const layers = storage.get("layers").toImmutable();
       setCanvasState({
@@ -416,7 +407,7 @@ export const Canvas = ({ boardId }: CanvasProps) => {
     [setCanvasState, camera, history, canvasState.mode]
   );
 
-  const deleteLayers = useDeleteLayers();
+  useDeleteLayers();
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
@@ -440,6 +431,14 @@ export const Canvas = ({ boardId }: CanvasProps) => {
       document.removeEventListener("keydown", onKeyDown);
     };
   }, [history]);
+
+  if (!isInsideRoom) {
+    return null 
+  }
+  
+  if (!storageRoot) {
+    return null; 
+  }
 
   return (
     <main className="h-full w-full relative bg-neutral-100 touch-none">

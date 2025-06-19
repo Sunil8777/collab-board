@@ -14,7 +14,7 @@ export function EmptyBoards() {
     mutate({
       orgId: organization.id,
       title: "Untitled"
-    }).then((id)=>{
+    }).then(()=>{
       toast.success("Board created")
 
     }).catch(()=>{
