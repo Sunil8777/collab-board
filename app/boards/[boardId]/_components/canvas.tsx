@@ -48,15 +48,10 @@ interface CanvasProps {
 
 export const Canvas = ({ boardId }: CanvasProps) => {
   const layerIds = useStorage((root) => root.layerIds);
-  console.log("layerIds", layerIds);
 
   const pencilDraft = useSelf((self) => self.presence.pencilDraft);
 
   const selections = useOthersMapped((other) => other.presence.selection);
-  
-  
-
-  console.log("selections", selections);
 
   const layerIdsToColorSelection = useMemo(() => {
     const layerIdsToColorSelection: Record<string, string> = {};

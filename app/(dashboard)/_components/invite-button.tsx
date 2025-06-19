@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { OrganizationProfile } from "@clerk/nextjs";
 import { Plus } from "lucide-react";
 
 export function InviteButton() {
+
+  console.log(OrganizationProfile)
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -12,9 +14,12 @@ export function InviteButton() {
           Invite members
         </Button>
       </DialogTrigger>
-      <DialogContent className="border-none p-0 bg-transparent min-w-[880]">
-        <OrganizationProfile />
-      </DialogContent>
+      <DialogTitle>
+        <DialogContent className="border-none p-0 bg-transparent min-w-[880]">
+          <OrganizationProfile routing="hash"/>
+        </DialogContent>
+      </DialogTitle>
+      
     </Dialog>
   );
 }
